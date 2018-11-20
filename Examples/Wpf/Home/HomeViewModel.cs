@@ -121,7 +121,8 @@ namespace Wpf.Home
                         new SampleVm("Events", typeof(EventsExample)),
                         new SampleVm("Visual Elements", typeof(UiElementsAndEventsExample)),
                         new SampleVm("Chart to Image", typeof(ChartToImageSample)),
-                        new SampleVm("DataLabelTemplate", typeof(DataLabelTemplateSample))
+                        new SampleVm("DataLabelTemplate", typeof(DataLabelTemplateSample)),
+                        new SampleVm("Axis Crossing", typeof(CartesianChart.AxisCrossing.BasicColumnAxisCrossingExample)),
                     }
                 },
                 new SampleGroupVm

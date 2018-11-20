@@ -94,6 +94,15 @@ namespace LiveCharts.Definitions.Charts
         ///   <c>true</c> if this instance is merged; otherwise, <c>false</c>.
         /// </value>
         bool IsMerged { get; set; }
+
+        /// <summary>
+        /// Gets or sets the crossing
+        /// </summary>
+        /// <value>
+        /// The crossing
+        /// </value>
+        double Crossing { get; set; }
+
         /// <summary>
         /// Gets or sets the bar unit.
         /// </summary>
@@ -109,6 +118,8 @@ namespace LiveCharts.Definitions.Charts
         /// </value>
         [Obsolete]
         double BarUnit { get; set; }
+
+
         /// <summary>
         /// Gets the previous maximum value.
         /// </summary>

@@ -327,6 +327,22 @@ namespace LiveCharts.Wpf
         }
 
         /// <summary>
+        /// The maximum value property
+        /// </summary>
+        public static readonly DependencyProperty CrossingProperty = DependencyProperty.Register(
+            "Crossing", typeof(double), typeof(Axis),
+            new PropertyMetadata(0d, UpdateChart()));
+
+        /// <summary>
+        /// Gets or sets axis crossing value, default value is 0
+        /// </summary>
+        public double Crossing
+        {
+            get { return (double)GetValue(CrossingProperty); }
+            set { SetValue(CrossingProperty, value); }
+        }
+
+        /// <summary>
         /// The disable animations property
         /// </summary>
         public static readonly DependencyProperty DisableAnimationsProperty = DependencyProperty.Register(
@@ -625,6 +641,7 @@ namespace LiveCharts.Wpf
             Model.ShowLabels = ShowLabels;
             Model.Chart = chart;
             Model.IsMerged = IsMerged;
+            Model.Crossing = Crossing;
             Model.Labels = Labels;
             Model.LabelFormatter = LabelFormatter;
             Model.MaxValue = MaxValue;
@@ -634,7 +651,7 @@ namespace LiveCharts.Wpf
             Model.Separator = Separator.AsCoreElement(Model, source);
             Model.DisableAnimations = DisableAnimations;
             Model.Sections = Sections.Select(x => x.AsCoreElement(Model, source)).ToList();
-
+            
             return Model;
         }
 

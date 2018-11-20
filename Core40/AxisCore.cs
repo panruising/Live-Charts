@@ -148,6 +148,11 @@ namespace LiveCharts
         ///   <c>true</c> if this instance is merged; otherwise, <c>false</c>.
         /// </value>
         public bool IsMerged { get; set; }
+
+        /// <summary>
+        /// Gets or sets the crossing
+        /// </summary>
+        public double Crossing { get; set; }
         /// <summary>
         /// Gets a value indicating whether [evaluates unit width].
         /// </summary>

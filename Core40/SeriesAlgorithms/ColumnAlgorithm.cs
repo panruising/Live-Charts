@@ -77,11 +77,21 @@ namespace LiveCharts.SeriesAlgorithms
 
             var relativeLeft = padding + exceed + singleColWidth*(seriesPosition);
 
-            var startAt = CurrentYAxis.FirstSeparator >= 0 && CurrentYAxis.LastSeparator > 0   //both positive
-                ? CurrentYAxis.FirstSeparator                                                  //then use axisYMin
-                : (CurrentYAxis.FirstSeparator < 0 && CurrentYAxis.LastSeparator <= 0          //both negative
-                    ? CurrentYAxis.LastSeparator                                               //then use axisYMax
-                    : 0);                                                                      //if mixed then use 0
+            var startAt = 0d;
+
+            if ((CurrentYAxis.Crossing <= CurrentYAxis.LastSeparator &&
+                CurrentYAxis.Crossing >= CurrentYAxis.FirstSeparator))
+            {
+                startAt = CurrentYAxis.Crossing;
+            }
+            else
+            {
+                startAt = CurrentYAxis.FirstSeparator >= 0 && CurrentYAxis.LastSeparator > 0   //both positive
+                    ? CurrentYAxis.FirstSeparator                                                  //then use axisYMin
+                    : (CurrentYAxis.FirstSeparator < 0 && CurrentYAxis.LastSeparator <= 0          //both negative
+                        ? CurrentYAxis.LastSeparator                                               //then use axisYMax
+                        : 0);                                                                      //if mixed then use 0
+            }
 
             var zero = ChartFunctions.ToDrawMargin(startAt, AxisOrientation.Y, Chart, View.ScalesYAt);
 

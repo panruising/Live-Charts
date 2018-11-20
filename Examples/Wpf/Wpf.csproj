@@ -88,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CartesianChart\AxisCrossing\BasicColumnAxisCrossingExample.xaml.cs">
+      <DependentUpon>BasicColumnAxisCrossingExample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CartesianChart\Chart to Image\ChartToImageSample.xaml.cs">
       <DependentUpon>ChartToImageSample.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
     </Compile>
     <Compile Include="Home\SampleGroupVm.cs" />
     <Compile Include="Home\SampleVm.cs" />
+    <Page Include="CartesianChart\AxisCrossing\BasicColumnAxisCrossingExample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CartesianChart\Basic Bars\BasicColumn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
