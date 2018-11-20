@@ -55,8 +55,18 @@ namespace LiveCharts.Dtos
 
                 if (source == AxisOrientation.Y)
                 {
-                    XOffset = padding;
-                    YOffset = padding;
+                    if (axis.Position == AxisPosition.LeftBottom)
+                    {
+                        //Left
+                        XOffset = padding;
+                        YOffset = padding;
+                    }
+                    else
+                    {
+                        //Right
+                        XOffset = -padding - w;
+                        YOffset = padding;
+                    }
                 }
                 else
                 {
@@ -80,8 +90,8 @@ namespace LiveCharts.Dtos
             //OK now lets evaluate the rotation angle...
 
             // the rotation angle starts from an horizontal line, yes like this text
-            // - 0°, | 90°, - 180°, | 270°
-            // notice normally rotating a label from 90 to 270° will show the label
+            // - 0? | 90? - 180? | 270?
+            // notice normally rotating a label from 90 to 270?will show the label
             // in a wrong orientation
             // we need to fix that angle
 
@@ -153,7 +163,7 @@ namespace LiveCharts.Dtos
             {
                 // X Axis
 
-                //axis x has one exception, if labels rotation equals 0° then the label is centered
+                //axis x has one exception, if labels rotation equals 0?then the label is centered
                 if (Math.Abs(axis.View.LabelsRotation) < .01)
                 {
                     Left = TakenWidth / 2;

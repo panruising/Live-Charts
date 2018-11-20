@@ -255,6 +255,7 @@ namespace LiveCharts.Charts
                 else
                 {
                     ax.View.SetTitleLeft(x + curSize.Width - titleSize.Height);
+                    curSize.Left += titleSize.Height + biggest.Width + padding;
                     curSize.Width -= (titleSize.Height + biggest.Width + padding);
                     ax.Tab = curSize.Left + curSize.Width;
                 }

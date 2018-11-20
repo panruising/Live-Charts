@@ -54,7 +54,7 @@
                             <lvc:Axis IsEnabled="False" ShowLabels="False"></lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis IsMerged="True" FontSize="14"></lvc:Axis>
+                            <lvc:Axis IsMerged="True" FontSize="14" ></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </Canvas>
