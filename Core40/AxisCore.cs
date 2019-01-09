@@ -36,7 +36,6 @@ namespace LiveCharts
     /// </summary>
     public class AxisCore
     {
-        private double _topLimit;
 
         #region Constructors
 
@@ -189,33 +188,48 @@ namespace LiveCharts
 
         #region Internal Properties
 
-        internal double Tab { get; set; }
 
-        internal double TopLimit
-        {
-            get { return _topLimit; }
-            set
-            {
-                _topLimit = value;
-            }
-        }
+        //#modify by feng
 
-        internal double BotLimit { get; set; }
-        internal double TopSeriesLimit { get; set; }
-        internal double BotSeriesLimit { get; set; }
-        internal double MaxPointRadius { get; set; }
-        internal double Magnitude { get; set; }
-        internal double CleanFactor { get; set; }
-        internal Dictionary<double, SeparatorElementCore> Cache { get; set; }
-        internal double? LastAxisMax { get; set; }
-        internal double? LastAxisMin { get; set; }
-        internal CoreRectangle LastPlotArea { get; set; }
-        internal int GarbageCollectorIndex { get; set; }
-        internal double PreviousTop { get; set; }
-        internal double PreviousBot { get; set; }
-        protected internal double FirstSeparator { get; protected set; }
-        protected internal double LastSeparator { get; protected set; }
 
+        public double Tab { get; set; }
+
+        public double TopLimit { get; set; }
+        public double BotLimit { get; set; }
+        public double TopSeriesLimit { get; set; }
+        public double BotSeriesLimit { get; set; }
+        public double MaxPointRadius { get; set; }
+        public double Magnitude { get; set; }
+        public double CleanFactor { get; set; }
+        public Dictionary<double, SeparatorElementCore> Cache { get; set; }
+        public double? LastAxisMax { get; set; }
+        public double? LastAxisMin { get; set; }
+        public CoreRectangle LastPlotArea { get; set; }
+        public int GarbageCollectorIndex { get; set; }
+        public double PreviousTop { get; set; }
+        public double PreviousBot { get; set; }
+        public double FirstSeparator { get; set; }
+        public double LastSeparator { get; set; }
+        //#before modify by feng
+        //internal double Tab { get; set; }
+
+        //internal double TopLimit { get; set; }
+        //internal double BotLimit { get; set; }
+        //internal double TopSeriesLimit { get; set; }
+        //internal double BotSeriesLimit { get; set; }
+        //internal double MaxPointRadius { get; set; }
+        //internal double Magnitude { get; set; }
+        //internal double CleanFactor { get; set; }
+        //internal Dictionary<double, SeparatorElementCore> Cache { get; set; }
+        //internal double? LastAxisMax { get; set; }
+        //internal double? LastAxisMin { get; set; }
+        //internal CoreRectangle LastPlotArea { get; set; }
+        //internal int GarbageCollectorIndex { get; set; }
+        //internal double PreviousTop { get; set; }
+        //internal double PreviousBot { get; set; }
+        //protected internal double FirstSeparator { get; protected set; }
+        //protected internal double LastSeparator { get; protected set; }
+        //#end modify by feng
         #endregion
 
         #region Public Methods

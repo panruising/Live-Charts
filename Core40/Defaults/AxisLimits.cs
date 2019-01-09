@@ -24,41 +24,81 @@ using System;
 
 namespace LiveCharts.Defaults
 {
-    internal static class AxisLimits
+    //#modify by feng    
+    public static class AxisLimits
     {
-        internal static double StretchMax(AxisCore axis)
+        public static double StretchMax(AxisCore axis)
         {
             return axis.TopLimit; //Math.Ceiling(axis.TopLimit/axis.Magnitude)*axis.Magnitude;
         }
 
-        internal static double StretchMin(AxisCore axis)
+        public static double StretchMin(AxisCore axis)
         {
             return axis.BotLimit; //Math.Floor(axis.BotLimit/axis.Magnitude)*axis.Magnitude;
         }
 
-        internal static double UnitRight(AxisCore axis)
+        public static double UnitRight(AxisCore axis)
         {
-            return Math.Ceiling(axis.TopLimit/axis.Magnitude)*axis.Magnitude + 1;
+            return Math.Ceiling(axis.TopLimit / axis.Magnitude) * axis.Magnitude + 1;
         }
 
-        internal static double UnitLeft(AxisCore axis)
+        public static double UnitLeft(AxisCore axis)
         {
-            return Math.Floor(axis.BotLimit/axis.Magnitude)*axis.Magnitude - 1;
+            return Math.Floor(axis.BotLimit / axis.Magnitude) * axis.Magnitude - 1;
         }
 
-        internal static double SeparatorMax(AxisCore axis)
+        public static double SeparatorMax(AxisCore axis)
         {
-            return (Math.Floor(axis.TopLimit/axis.S) + 1.0)*axis.S;
+            return (Math.Floor(axis.TopLimit / axis.S) + 1.0) * axis.S;
         }
 
-        internal static double SeparatorMaxRounded(AxisCore axis)
+        public static double SeparatorMaxRounded(AxisCore axis)
         {
-            return Math.Round((axis.TopLimit/axis.S) + 1.0, 0)*axis.S;
+            return Math.Round((axis.TopLimit / axis.S) + 1.0, 0) * axis.S;
         }
 
-        internal static double SeparatorMin(AxisCore axis)
+        public static double SeparatorMin(AxisCore axis)
         {
-            return ((Math.Floor(axis.BotLimit/axis.S)) - 1.0)*axis.S;
+            return ((Math.Floor(axis.BotLimit / axis.S)) - 1.0) * axis.S;
         }
     }
+    //#before modify by feng
+    //internal static class AxisLimits
+    //    {
+    //        internal static double StretchMax(AxisCore axis)
+    //        {
+    //            return axis.TopLimit; //Math.Ceiling(axis.TopLimit/axis.Magnitude)*axis.Magnitude;
+    //        }
+
+    //        internal static double StretchMin(AxisCore axis)
+    //        {
+    //            return axis.BotLimit; //Math.Floor(axis.BotLimit/axis.Magnitude)*axis.Magnitude;
+    //        }
+
+    //        internal static double UnitRight(AxisCore axis)
+    //        {
+    //            return Math.Ceiling(axis.TopLimit/axis.Magnitude)*axis.Magnitude + 1;
+    //        }
+
+    //        internal static double UnitLeft(AxisCore axis)
+    //        {
+    //            return Math.Floor(axis.BotLimit/axis.Magnitude)*axis.Magnitude - 1;
+    //        }
+
+    //        internal static double SeparatorMax(AxisCore axis)
+    //        {
+    //            return (Math.Floor(axis.TopLimit/axis.S) + 1.0)*axis.S;
+    //        }
+
+    //        internal static double SeparatorMaxRounded(AxisCore axis)
+    //        {
+    //            return Math.Round((axis.TopLimit/axis.S) + 1.0, 0)*axis.S;
+    //        }
+
+    //        internal static double SeparatorMin(AxisCore axis)
+    //        {
+    //            return ((Math.Floor(axis.BotLimit/axis.S)) - 1.0)*axis.S;
+    //        }
+    //    }
+    //#end modify by feng
 }

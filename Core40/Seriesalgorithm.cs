@@ -80,7 +80,14 @@ namespace LiveCharts
         /// <value>
         /// The preferred selection mode.
         /// </value>
-        public TooltipSelectionMode PreferredSelectionMode { get; internal set; }
+        public TooltipSelectionMode PreferredSelectionMode
+        {
+            get;
+            //#modify by feng
+            //internal set;
+            set;
+            //#end modify by feng
+        }
 
         /// <summary>
         /// Gets the current x axis.

@@ -890,8 +890,11 @@ namespace LiveCharts.Wpf.Charts.Base
             get { return (TimeSpan)GetValue(TooltipTimeoutProperty); }
             set { SetValue(TooltipTimeoutProperty, value); }
         }
-
-        internal void AttachHoverableEventTo(FrameworkElement element)
+        //#modify by feng
+        public void AttachHoverableEventTo(FrameworkElement element)
+        //#before modify by feng
+        //internal void AttachHoverableEventTo(FrameworkElement element)
+        //#end modify by feng
         {
             element.MouseDown -= DataMouseDown;
             element.MouseEnter -= DataMouseEnter;

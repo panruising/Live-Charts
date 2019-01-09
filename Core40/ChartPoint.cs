@@ -32,21 +32,31 @@ namespace LiveCharts
     /// </summary>
     public class ChartPoint
     {
-
         #region Cartesian 
-
+        //#modify by feng
         /// <summary>
         /// Gets the X point value
         /// </summary>
-        public double X { get; internal set; }
+        public double X { get; set; }
 
         /// <summary>
         /// Gets the Y point value
         /// </summary>
-        public double Y { get; internal set; }
-
+        public double Y { get; set; }
+        //#before modify by feng
+        /// <summary>
+        /// Gets the X point value
+        /// </summary>
+        //public double X { get; internal set; }
+        
+        /// <summary>
+        /// Gets the Y point value
+        /// </summary>
+        //public double Y { get; internal set; }
+        //#end modify by feng
         #endregion
 
+        #region Gantt
         /// <summary>
         /// Gets the Gantt x start value
         /// </summary>
@@ -58,8 +68,6 @@ namespace LiveCharts
         public double YStart { get; set; }
 
         internal bool EvaluatesGantt { get; set; }
-
-        #region Gantt
 
         #endregion
 
@@ -73,17 +81,27 @@ namespace LiveCharts
         #endregion
 
         #region stacked
-
+        //#modify by feng
         /// <summary>
         /// Gets where the stacked value started from
         /// </summary>
-        public double From { get; internal set; }
+        public double From { get; set; }
 
         /// <summary>
         /// Gets where the stacked value finishes
         /// </summary>
-        public double To { get; internal set; }
+        public double To { get; set; }
+        //#before modify by feng
+        /// <summary>
+        /// Gets where the stacked value started from
+        /// </summary>
+        //public double From { get; internal set; }
 
+        /// <summary>
+        /// Gets where the stacked value finishes
+        /// </summary>
+        //public double To { get; internal set; }
+        //#end modify by feng
         /// <summary>
         /// Get the total sum of the stacked elements
         /// </summary>
@@ -140,21 +158,35 @@ namespace LiveCharts
         #endregion
 
         #region Appearance
+        //#modify by feng
         /// <summary>
         /// Gets the Fill brush of this point, this property overrides series Fill property 
         /// </summary>
-        public object Fill { get; internal set; }
+        public object Fill { get; set; }
         /// <summary>
         /// Gets the Stroke brush of this point, this property overrides series Stroke property
         /// </summary>
-        public object Stroke { get; internal set; }
+        public object Stroke { get; set; }
+        //#before modify by feng
+        /// <summary>
+        /// Gets the Fill brush of this point, this property overrides series Fill property 
+        /// </summary>
+        //public object Fill { get; internal set; }
+        /// <summary>
+        /// Gets the Stroke brush of this point, this property overrides series Stroke property
+        /// </summary>
+        //public object Stroke { get; internal set; }
+        //#end modify by feng
         #endregion
 
+        //#modify by feng
         /// <summary>
         /// Gets the coordinate where the value is placed at chart
         /// </summary>
-        public CorePoint ChartLocation { get; internal set; }
-
+        public CorePoint ChartLocation { get; set; }
+        //#before modify by feng
+        //public CorePoint ChartLocation { get; internal set; }
+        //#end modify by feng
         /// <summary>
         /// Gets the index of this point in the chart
         /// </summary>
@@ -165,15 +197,22 @@ namespace LiveCharts
         /// </summary>
         public object Instance { get; internal set; }
 
+        //#modify by feng
         /// <summary >
         /// Gets or sets the view of this chart point
         /// </summary>
-        public IChartPointView View { get; internal set; }
+        public IChartPointView View { get; set; }
 
         /// <summary>
         /// Gets the series where the point belongs to
         /// </summary>
-        public ISeriesView SeriesView { get; internal set; }
+        public ISeriesView SeriesView { get; set; }
+        //#before modify
+        //public IChartPointView View { get; internal set; }
+        //public ISeriesView SeriesView { get; internal set; }
+        //#end modify by feng
+
+
 
         /// <summary>
         /// Gets the chart view.

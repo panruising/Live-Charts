@@ -34,13 +34,17 @@ namespace LiveCharts
         /// The formatted text.
         /// </value>
         public string FormattedText { get; set; }
+        //#modify by feng
         /// <summary>
         /// Gets the instance of the current point.
         /// </summary>
         /// <value>
         /// The instance.
         /// </value>
-        public ChartPoint Point { get; internal set; }
+        public ChartPoint Point { get; set; }
+        //#before modify by feng
+        //public ChartPoint Point { get; internal set; }
+        //#end modify by feng
 
     }
 }

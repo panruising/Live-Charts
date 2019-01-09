@@ -75,7 +75,11 @@ namespace LiveCharts.Wpf
         #region Properties
 
         private IChartValues LastKnownValues { get; set; }
-        internal double DefaultFillOpacity { get; set; }
+        //#modify by feng
+        public double DefaultFillOpacity { get; set; }
+        //#before modify by feng
+        //internal double DefaultFillOpacity { get; set; }
+        //#end modify by feng
         /// <summary>
         /// Gets a value indicating whether this instance is first draw.
         /// </summary>
@@ -407,8 +411,11 @@ namespace LiveCharts.Wpf
         #endregion
 
         #region Internal Helpers
-
-        internal ContentControl UpdateLabelContent(DataLabelViewModel content, ContentControl currentControl)
+        //#modify by feng
+        public ContentControl UpdateLabelContent(DataLabelViewModel content, ContentControl currentControl)
+        //#before modify by feng
+        //internal ContentControl UpdateLabelContent(DataLabelViewModel content, ContentControl currentControl)
+        //#end modify by feng
         {
             ContentControl control;
 

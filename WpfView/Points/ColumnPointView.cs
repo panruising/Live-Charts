@@ -32,7 +32,11 @@ using LiveCharts.Dtos;
 
 namespace LiveCharts.Wpf.Points
 {
-    internal class ColumnPointView : PointView, IRectanglePointView
+    //#modify by feng
+    public class ColumnPointView : PointView, IRectanglePointView
+    //#before modify by feng
+    //internal class ColumnPointView : PointView, IRectanglePointView
+    //#end modify by feng
     {
         public Rectangle Rectangle { get; set; }
         public CoreRectangle Data { get; set; }
