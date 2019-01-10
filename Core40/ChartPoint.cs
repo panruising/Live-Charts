@@ -72,12 +72,14 @@ namespace LiveCharts
         #endregion
 
         #region Weighted
-
+        //#modify by feng
+        public double Weight { get; set; }
+        //#before modify by feng
         /// <summary>
         /// Gets the Weight of the point
         /// </summary>
-        public double Weight { get; internal set; }
-
+        //public double Weight { get; internal set; }
+        //#end modify by feng
         #endregion
 
         #region stacked

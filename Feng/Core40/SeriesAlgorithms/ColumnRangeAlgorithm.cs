@@ -73,14 +73,11 @@ namespace LiveCharts.SeriesAlgorithms
 
             foreach (var chartPoint in View.ActualValues.GetPoints(View))
             {
-                double from =
-                    ChartFunctions.ToDrawMargin(chartPoint.From, AxisOrientation.X, Chart, View.ScalesXAt);
+                var reference =
+                    ChartFunctions.ToDrawMargin(chartPoint, View.ScalesXAt, View.ScalesYAt, Chart);
 
-                double to =
-                    ChartFunctions.ToDrawMargin(chartPoint.To, AxisOrientation.X, Chart, View.ScalesXAt);
-
-                double y =
-                   ChartFunctions.ToDrawMargin(chartPoint.Y, AxisOrientation.Y, Chart, View.ScalesYAt);
+                double weight =
+                    ChartFunctions.ToDrawMargin(chartPoint.Weight, AxisOrientation.X, Chart, View.ScalesXAt);
 
                 chartPoint.View = View.GetPointView(chartPoint,
                     View.DataLabels ? View.GetLabelPointFormatter()(chartPoint) : null);
@@ -89,16 +86,16 @@ namespace LiveCharts.SeriesAlgorithms
 
                 var rectangleView = (IRectanglePointView)chartPoint.View;
 
-                var h = Math.Abs(y - zero);
-                var t = y < zero
-                    ? y
+                var h = Math.Abs(reference.Y - zero);
+                var t = reference.Y < zero
+                    ? reference.Y
                     : zero;
 
                 rectangleView.Data.Height = h;
                 rectangleView.Data.Top = t;
 
-                rectangleView.Data.Left = Math.Min(from, to);
-                rectangleView.Data.Width = Math.Abs(to - from);
+                rectangleView.Data.Left = reference.X - weight / 2;
+                rectangleView.Data.Width = weight;
 
                 rectangleView.ZeroReference = zero;
 
