@@ -1,11 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using LiveCharts;
 using LiveCharts.Configurations;
+using System.Linq;
+using System.Collections.Generic;
+using LiveCharts.Wpf;
+using System.Windows.Media;
 
 namespace Wpf.CartesianChart.ConstantChanges
 {
@@ -37,9 +42,25 @@ namespace Wpf.CartesianChart.ConstantChanges
             //lets save the mapper globally.
             Charting.For<MeasureModel>(mapper);
 
-            //the values property will store our values array
-            ChartValues = new ChartValues<MeasureModel>();
+            Datas = new List<ChartValues<MeasureModel>>();
+            Series = new SeriesCollection();
+            for (int i = 0; i < 5; i++) {
 
+                ChartValues<MeasureModel> cv = new ChartValues<MeasureModel>();
+                Datas.Add(cv);
+                Series.Add(
+                    new LineSeries()
+                    {
+                        Values = cv,
+                        PointGeometry = null,
+                        LineSmoothness = 1,
+                        StrokeThickness = 6,
+                        Fill = new SolidColorBrush( System.Windows.Media.Colors.Transparent)
+                    });
+            }
+            //the values property will store our values array
+            //ChartValues = new ChartValues<MeasureModel>();
+            //ChartValues2 = new ChartValues<MeasureModel>();
             //lets set how to display the X Labels
             DateTimeFormatter = value => new DateTime((long) value).ToString("mm:ss");
 
@@ -57,12 +78,29 @@ namespace Wpf.CartesianChart.ConstantChanges
 
             DataContext = this;
         }
-
+        public SeriesCollection Series { get; set; }
+        public List<ChartValues<MeasureModel>> Datas { get; set; }
         public ChartValues<MeasureModel> ChartValues { get; set; }
+        public ChartValues<MeasureModel> ChartValues2 { get; set; }
         public Func<double, string> DateTimeFormatter { get; set; }
         public double AxisStep { get; set; }
         public double AxisUnit { get; set; }
 
+        TimeSpan elapsed;
+        public TimeSpan Elapsed
+        {
+            get
+            {
+                return elapsed;
+            }
+            set {
+                if (elapsed != value)
+                {
+                    elapsed = value;
+                    OnPropertyChanged("Elapsed");
+                }
+            }
+        }
         public double AxisMax
         {
             get { return _axisMax; }
@@ -82,29 +120,99 @@ namespace Wpf.CartesianChart.ConstantChanges
             }
         }
 
+        double yaxismax=100;
+        double yaxismin=-10;
+        public double YAxisMax
+        {
+            get { return yaxismax; }
+            set
+            {
+                if (yaxismax != value)
+                {
+                    yaxismax = value;
+                    OnPropertyChanged("YAxisMax");
+                }
+            }
+        }
+        public double YAxisMin
+        {
+            get { return yaxismin; }
+            set
+            {
+                if (yaxismin != value)
+                {
+                    yaxismin = value;
+                    OnPropertyChanged("YAxisMin");
+                }
+            }
+        }
         public bool IsReading { get; set; }
 
         private void Read()
         {
-            var r = new Random();
 
+            List<MeasureModel>[] lists = new List<MeasureModel>[Datas.Count()];
+            for (int i = 0; i < lists.Count(); i++)
+            {
+                lists[i] = new List<MeasureModel>();
+            }
+            int cnt = 0;
+            var r = new Random();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             while (IsReading)
             {
-                Thread.Sleep(150);
                 var now = DateTime.Now;
-
-                _trend += r.Next(-8, 10);
-
-                ChartValues.Add(new MeasureModel
+                
+                _trend = r.Next(-8, 10);
+                for (int i = 0; i < lists.Count(); i++)
                 {
-                    DateTime = now,
-                    Value = _trend
-                });
+                    lists[i].Add(new MeasureModel
+                    {
+                        DateTime = now,
+                        Value = r.Next(-8, 10) + i*10
+                    });
+                }
 
-                SetAxisLimits(now);
+                cnt++;
+                if (stopwatch.Elapsed > TimeSpan.FromSeconds(1))
+                {
+                    for (int i = 0; i < lists.Count(); i++)
+                    {
+                        Datas[i].AddRange(lists[i]);
+                        lists[i].Clear();
 
-                //lets only use the last 150 values
-                if (ChartValues.Count > 150) ChartValues.RemoveAt(0);
+                        while (Datas[i].First().DateTime < now - TimeSpan.FromSeconds(8))
+                        {
+                            Datas[i].RemoveAt(0);
+                        }
+                    }
+
+                    
+
+                    SetAxisLimits(now);
+
+                    if (cnt > 0)
+                    {
+                        Elapsed = TimeSpan.FromTicks(stopwatch.Elapsed.Ticks / cnt);
+                        cnt = 0;
+                    }
+                    else
+                    {
+                        Elapsed = TimeSpan.MaxValue;
+                    }
+                    stopwatch.Restart();
+                }
+                //double max = ChartValues.Max(m => m.Value);
+                //double min = ChartValues.Min(m => m.Value);
+                //if (Math.Abs(YAxisMax - max) > Math.Abs(max - min) / 10)
+                //{
+                //    YAxisMax = max;
+                //    YAxisMin = min;
+                //}
+                
+
+                Thread.Sleep(3);
             }
         }
 
@@ -113,7 +221,7 @@ namespace Wpf.CartesianChart.ConstantChanges
             AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 1 second ahead
             AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; // and 8 seconds behind
         }
-
+        
         private void InjectStopOnClick(object sender, RoutedEventArgs e)
         {
             IsReading = !IsReading;

@@ -16,15 +16,8 @@
             Inject/Stop Data
         </Button>
         <!--Here we disable tooltips and hovering to get a better performance-->
-        <lvc:CartesianChart Grid.Row="1" AnimationsSpeed="0:0:0.5" Hoverable="False" DataTooltip="{x:Null}">
-            <lvc:CartesianChart.Series>
-                <lvc:LineSeries Values="{Binding ChartValues}" 
-                                PointGeometry="{x:Null}" 
-                                LineSmoothness="1"
-                                StrokeThickness="6" 
-                                Stroke="#F34336"
-                                Fill="Transparent"/>
-            </lvc:CartesianChart.Series>
+        <lvc:CartesianChart Grid.Row="1" Series="{Binding Series}" DisableAnimations="True" Hoverable="False" DataTooltip="{x:Null}">
+
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
                           MaxValue="{Binding AxisMax}" 
@@ -35,6 +28,18 @@
                     </lvc:Axis.Separator>
                 </lvc:Axis>
             </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis 
+                          MaxValue="{Binding YAxisMax}" 
+                          MinValue="{Binding YAxisMin}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
+        <TextBlock Grid.Row="1" FontSize="20">
+            <Run Text="Elapsed = "/><Run Text="{Binding Elapsed}" />
+        </TextBlock>
     </Grid>
 </UserControl>
