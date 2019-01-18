@@ -113,6 +113,9 @@
     <Compile Include="CartesianChart\Feng\ColumnRangeExample.xaml.cs">
       <DependentUpon>ColumnRangeExample.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CartesianChart\Feng\ScanGraphExample.xaml.cs">
+      <DependentUpon>ScanGraphExample.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CartesianChart\Financial\CandleStickExample.xaml.cs">
       <DependentUpon>CandleStickExample.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
     <Page Include="CartesianChart\Feng\ColumnRangeExample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CartesianChart\Feng\ScanGraphExample.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CartesianChart\Financial\CandleStickExample.xaml">
       <SubType>Designer</SubType>
