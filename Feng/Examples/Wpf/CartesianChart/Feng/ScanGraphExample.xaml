@@ -5,15 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wpf.CartesianChart.Feng"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lvc_feng="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Feng.Wpf"
              mc:Ignorable="d" 
+             Background="WhiteSmoke"
              d:DesignHeight="350" d:DesignWidth="600">
     <UserControl.Resources>
+        <local:ScanGraphViewModel x:Key="viewmodel"/>
         <Geometry x:Key="geometry_infomation">
             M13,9H11V7H13M13,17H11V11H13Z
         </Geometry>
         <SolidColorBrush x:Key="brush_foreground" Color="#4C4949"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid d:DataContext="{StaticResource viewmodel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
@@ -71,7 +74,18 @@
             </StackPanel>
         </Grid>
 
-        <lvc:CartesianChart Grid.Row="1" x:Name="chart" />
+        <lvc:CartesianChart Grid.Row="1" x:Name="chart" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}">
+            <lvc:CartesianChart.Series>
+                <lvc_feng:Column2Series x:Name="column2Series" 
+                                        Stroke="Black" StrokeThickness="1" YAxisCrossing="{Binding Target}"/>
+            </lvc:CartesianChart.Series>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis MinValue="{Binding XMin}" MaxValue="{Binding XMax}" Unit="10"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis LabelFormatter="{Binding Formatter}" ></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
 
     </Grid>
 </UserControl>

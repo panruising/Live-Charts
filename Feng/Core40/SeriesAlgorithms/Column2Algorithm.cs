@@ -34,13 +34,13 @@ namespace LiveCharts.SeriesAlgorithms
     /// </summary>
     /// <seealso cref="LiveCharts.SeriesAlgorithm" />
     /// <seealso cref="LiveCharts.Definitions.Series.ICartesianSeries" />
-    public class ColumnAlgorithm : SeriesAlgorithm, ICartesianSeries
+    public class Column2Algorithm : SeriesAlgorithm, ICartesianSeries
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ColumnAlgorithm"/> class.
         /// </summary>
         /// <param name="view">The view.</param>
-        public ColumnAlgorithm(ISeriesView view) : base(view)
+        public Column2Algorithm(ISeriesView view) : base(view)
         {
             SeriesOrientation = SeriesOrientation.Horizontal;
             PreferredSelectionMode = TooltipSelectionMode.SharedXValues;
@@ -51,39 +51,27 @@ namespace LiveCharts.SeriesAlgorithms
         /// </summary>
         public override void Update()
         {
-            var columnSeries = (IColumnSeriesView) View;
+            var columnSeries = (IColumn2SeriesView)View;
 
-            var padding = columnSeries.ColumnPadding;
+            var totalSpace = ChartFunctions.GetUnitWidth(AxisOrientation.X, Chart, View.ScalesXAt);
 
-            var totalSpace = ChartFunctions.GetUnitWidth(AxisOrientation.X, Chart, View.ScalesXAt) - padding;
-            var typeSeries = Chart.View.ActualSeries.Where(x =>
-            {
-                if (x == View) return true;
-                var icsv = x as IColumnSeriesView;
-                return icsv != null && icsv.SharesPosition;
-            }).ToList();
-
-            var singleColWidth = totalSpace / typeSeries.Count;
-
-            double exceed = 0;
-
-            var seriesPosition = typeSeries.IndexOf(columnSeries);
-
-            if (singleColWidth > columnSeries.MaxColumnWidth)
-            {
-                exceed = (singleColWidth - columnSeries.MaxColumnWidth)*typeSeries.Count/2;
-                singleColWidth = columnSeries.MaxColumnWidth;
-            }
-
-            var relativeLeft = padding + exceed + singleColWidth*(seriesPosition);
-
+            var singleColWidth = totalSpace;
+            
             var startAt = 0d;
 
+            if ((columnSeries.YAxisCrossing <= CurrentYAxis.LastSeparator &&
+                columnSeries.YAxisCrossing >= CurrentYAxis.FirstSeparator))
+            {
+                startAt = columnSeries.YAxisCrossing;
+            }
+            else
+            {
                 startAt = CurrentYAxis.FirstSeparator >= 0 && CurrentYAxis.LastSeparator > 0   //both positive
                     ? CurrentYAxis.FirstSeparator                                                  //then use axisYMin
                     : (CurrentYAxis.FirstSeparator < 0 && CurrentYAxis.LastSeparator <= 0          //both negative
                         ? CurrentYAxis.LastSeparator                                               //then use axisYMax
                         : 0);                                                                      //if mixed then use 0
+            }
 
             var zero = ChartFunctions.ToDrawMargin(startAt, AxisOrientation.Y, Chart, View.ScalesYAt);
 
@@ -97,22 +85,20 @@ namespace LiveCharts.SeriesAlgorithms
 
                 chartPoint.SeriesView = View;
 
-                var rectangleView = (IRectanglePointView) chartPoint.View;
+                var rectangleView = (IRectanglePointView)chartPoint.View;
 
                 var h = Math.Abs(reference.Y - zero);
-                var t = reference.Y < zero
-                    ? reference.Y
-                    : zero;
+                var t = reference.Y < zero ? reference.Y : zero;
 
                 rectangleView.Data.Height = h;
                 rectangleView.Data.Top = t;
 
-                rectangleView.Data.Left = reference.X + relativeLeft;
-                rectangleView.Data.Width = singleColWidth - padding;
+                rectangleView.Data.Left = reference.X - singleColWidth / 2;
+                rectangleView.Data.Width = singleColWidth;
 
                 rectangleView.ZeroReference = zero;
 
-                chartPoint.ChartLocation = new CorePoint(rectangleView.Data.Left + singleColWidth/2 - padding/2,
+                chartPoint.ChartLocation = new CorePoint(rectangleView.Data.Left + singleColWidth / 2,
                     t);
 
                 chartPoint.View.DrawOrMove(null, chartPoint, 0, Chart);
@@ -121,7 +107,7 @@ namespace LiveCharts.SeriesAlgorithms
 
         double ICartesianSeries.GetMinX(AxisCore axis)
         {
-            return AxisLimits.StretchMin(axis);
+            return AxisLimits.UnitLeft(axis);
         }
 
         double ICartesianSeries.GetMaxX(AxisCore axis)

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Wpf.CartesianChart.AxisCrossing.BasicColumnAxisCrossingExample"
+﻿<UserControl x:Class="Wpf.CartesianChart.Feng.BasicColumnAxisCrossingExample"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,7 +13,7 @@
                 <lvc:Axis Title="Salesman" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}" Crossing="30"></lvc:Axis>
+                <lvc:Axis Title="Sold Apps" LabelFormatter="{Binding Formatter}" ></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart> 
     </Grid>

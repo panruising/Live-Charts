@@ -55,10 +55,10 @@ namespace LiveCharts.SeriesAlgorithms
 
             double startAt = 0d;
 
-            if ((CurrentYAxis.Crossing <= CurrentYAxis.LastSeparator &&
-                CurrentYAxis.Crossing >= CurrentYAxis.FirstSeparator))
+            if ((columnSeries.YAxisCrossing <= CurrentYAxis.LastSeparator &&
+                columnSeries.YAxisCrossing >= CurrentYAxis.FirstSeparator))
             {
-                startAt = CurrentYAxis.Crossing;
+                startAt = columnSeries.YAxisCrossing;
             }
             else
             {

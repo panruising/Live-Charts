@@ -54,11 +54,12 @@ namespace Wpf.CartesianChart.Feng
                     Stroke = new SolidColorBrush(System.Windows.Media.Colors.DarkRed),
                     Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(0x80, 0xff,0,0)),
                     DataLabels = true,
+                    YAxisCrossing = 150,
                     Configuration = Mappers.Weighted<BoltValue>()
                     .X(b=>(b.From + b.To)/2)
                     .Weight(b=> Math.Abs(b.From-b.To))
                     .Y(b=>b.Value)
-
+                    
 
                 }
             };

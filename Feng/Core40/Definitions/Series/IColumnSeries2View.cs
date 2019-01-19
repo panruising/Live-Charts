@@ -26,7 +26,7 @@ namespace LiveCharts.Definitions.Series
     /// 
     /// </summary>
     /// <seealso cref="LiveCharts.Definitions.Series.ISeriesView" />
-    public interface IColumnRangeSeriesView : ISeriesView
+    public interface IColumn2SeriesView : ISeriesView
     {
         /// <summary>
         /// The Value of XAxis and YAxis crossing in YAxis

@@ -37,24 +37,24 @@ namespace LiveCharts.Wpf
     /// <summary>
     /// Use the column series to plot horizontal bars in a cartesian chart
     /// </summary>
-    public class ColumnRangeSeries : Series, IColumnRangeSeriesView
+    public class Column2Series : Series, IColumn2SeriesView
     {
         #region Constructors
         /// <summary>
         /// Initializes a new instance of ColumnSeries class
         /// </summary>
-        public ColumnRangeSeries()
+        public Column2Series()
         {
-            Model = new ColumnRangeAlgorithm(this);
+            Model = new Column2Algorithm(this);
             InitializeDefuaults();
         }
 
         /// <summary>
         /// Initializes a new instance of ColumnSeries class, using a given mapper
         /// </summary>
-        public ColumnRangeSeries(object configuration)
+        public Column2Series(object configuration)
         {
-            Model = new ColumnRangeAlgorithm(this);
+            Model = new Column2Algorithm(this);
             Configuration = configuration;
             InitializeDefuaults();
         }
@@ -71,7 +71,7 @@ namespace LiveCharts.Wpf
         /// The Value of XAxis and YAxis crossing in YAxis property
         /// </summary>
         public static readonly DependencyProperty YAxisCrossingProperty = DependencyProperty.Register(
-            "YAxisCrossing", typeof(double), typeof(ColumnRangeSeries), new PropertyMetadata(0d));
+            "YAxisCrossing", typeof(double), typeof(Column2Series), new PropertyMetadata(0d));
         /// <summary>
         /// Gets or sets the YAxisCrossing
         /// </summary>
@@ -81,11 +81,13 @@ namespace LiveCharts.Wpf
             set { SetValue(YAxisCrossingProperty, value); }
         }
 
+
+
         /// <summary>
         /// The labels position property
         /// </summary>
         public static readonly DependencyProperty LabelsPositionProperty = DependencyProperty.Register(
-            "LabelsPosition", typeof(BarLabelPosition), typeof(ColumnRangeSeries),
+            "LabelsPosition", typeof(BarLabelPosition), typeof(Column2Series),
             new PropertyMetadata(default(BarLabelPosition), CallChartUpdater()));
         /// <summary>
         /// Gets or sets where the label is placed
@@ -95,6 +97,7 @@ namespace LiveCharts.Wpf
             get { return (BarLabelPosition)GetValue(LabelsPositionProperty); }
             set { SetValue(LabelsPositionProperty, value); }
         }
+
 
         #endregion
 
@@ -188,6 +191,7 @@ namespace LiveCharts.Wpf
         private void InitializeDefuaults()
         {
             SetCurrentValue(StrokeThicknessProperty, 0d);
+
             SetCurrentValue(LabelsPositionProperty, BarLabelPosition.Top);
 
             Func<ChartPoint, string> defaultLabel = x => Model.CurrentYAxis.GetFormatter()(x.Y);

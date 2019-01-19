@@ -96,14 +96,6 @@ namespace LiveCharts.Definitions.Charts
         bool IsMerged { get; set; }
 
         /// <summary>
-        /// Gets or sets the crossing
-        /// </summary>
-        /// <value>
-        /// The crossing
-        /// </value>
-        double Crossing { get; set; }
-
-        /// <summary>
         /// Gets or sets the bar unit.
         /// </summary>
         /// <value>
