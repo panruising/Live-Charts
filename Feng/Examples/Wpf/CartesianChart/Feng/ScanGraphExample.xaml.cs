@@ -53,56 +53,39 @@ namespace Wpf.CartesianChart.Feng
     }
     public class ScanGraphViewModel : INotifyPropertyChanged
     {
-        private double _target;
-        private double _ctrlline;
-        private double _tolerance;
-        private double _yRange;
-        private int _xMin;
-        private int _xMax;
-        private int _analyze_XMin;
-        private int _analyze_XMax;
 
 
         /// <summary>
         /// 目标值
         /// </summary>
-        public double Target
-        {
-            get => _target;
-            set {
-                if (_target != value)
-                {
-                    _target = value;
-                }
-            }
-        }
+        public double Target { get; set; }
         /// <summary>
         /// 控制线
         /// </summary>
-        public double Ctrlline { get => _ctrlline; set => _ctrlline = value; }
+        public double Ctrlline { get; set; }
         /// <summary>
         /// 规格线
         /// </summary>
-        public double Tolerance { get => _tolerance; set => _tolerance = value; }
+        public double Tolerance { get; set; }
 
         /// <summary>
         /// Y轴显示范围
         /// </summary>
-        public double YRange { get => _yRange; set => _yRange = value; }
+        public double YRange { get; set; }
         //X轴最小值
-        public int XMin { get => _xMin; set => _xMin = value; }
+        public int XMin { get; set; }
         /// <summary>
         /// X轴最大值
         /// </summary>
-        public int XMax { get => _xMax; set => _xMax = value; }
+        public int XMax { get; set; }
         /// <summary>
         /// 分析范围最小值
         /// </summary>
-        public int Analyze_XMin { get => _analyze_XMin; set => _analyze_XMin = value; }
+        public int Analyze_XMin { get; set; }
         /// <summary>
         /// 分析范围最大值
         /// </summary>
-        public int Analyze_XMax { get => _analyze_XMax; set => _analyze_XMax = value; }
+        public int Analyze_XMax { get; set; }
         /// <summary>
         /// 数据
         /// </summary>
