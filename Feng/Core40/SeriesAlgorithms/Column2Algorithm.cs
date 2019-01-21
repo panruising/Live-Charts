@@ -54,9 +54,19 @@ namespace LiveCharts.SeriesAlgorithms
             var columnSeries = (IColumn2SeriesView)View;
 
             var totalSpace = ChartFunctions.GetUnitWidth(AxisOrientation.X, Chart, View.ScalesXAt);
+            var singleColWidth = totalSpace;//当只有一个时，才用
+            var chartPoints = View.ActualValues.GetPoints(View);
+            if (chartPoints.Count() > 1)
+            {
+                var chartPoint0 = chartPoints.ElementAt(0);
+                var chartPoint1 = chartPoints.ElementAt(1);
+                //double width = Math.Abs(chartPoint0.X - chartPoint1.X);
+                //singleColWidth = ChartFunctions.ToDrawMargin(width, AxisOrientation.X, Chart, View.ScalesXAt);
+                double x0 = ChartFunctions.ToDrawMargin(chartPoint0.X, AxisOrientation.X, Chart, View.ScalesXAt);
+                double x1 = ChartFunctions.ToDrawMargin(chartPoint1.X, AxisOrientation.X, Chart, View.ScalesXAt);
+                singleColWidth = Math.Abs(x1 - x0);
+            }
 
-            var singleColWidth = totalSpace;
-            
             var startAt = 0d;
 
             if ((columnSeries.YAxisCrossing <= CurrentYAxis.LastSeparator &&
@@ -75,10 +85,12 @@ namespace LiveCharts.SeriesAlgorithms
 
             var zero = ChartFunctions.ToDrawMargin(startAt, AxisOrientation.Y, Chart, View.ScalesYAt);
 
-            foreach (var chartPoint in View.ActualValues.GetPoints(View))
+
+            for(int i=0;i<chartPoints.Count();i++)
             {
-                var reference =
-                    ChartFunctions.ToDrawMargin(chartPoint, View.ScalesXAt, View.ScalesYAt, Chart);
+                var chartPoint = chartPoints.ElementAt(i);
+
+                var reference = ChartFunctions.ToDrawMargin(chartPoint, View.ScalesXAt, View.ScalesYAt, Chart);
 
                 chartPoint.View = View.GetPointView(chartPoint,
                     View.DataLabels ? View.GetLabelPointFormatter()(chartPoint) : null);

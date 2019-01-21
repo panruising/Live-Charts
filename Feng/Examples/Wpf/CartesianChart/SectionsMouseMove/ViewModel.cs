@@ -11,8 +11,8 @@ namespace Wpf.CartesianChart.SectionsMouseMove
         public ViewModel()
         {
             //lets initialize in an invisible location
-            XPointer = -5;
-            YPointer = -5;
+            XPointer = 3;// -5;
+            YPointer = 3;// -5;
 
             //the formatter or labels property is shared 
             Formatter = x => x.ToString("N2");
